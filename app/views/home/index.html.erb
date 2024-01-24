@@ -1,0 +1,51 @@
+<!-- app/views/welcome/index.html.erb -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to My Rails Application</title>
+  <%= csrf_meta_tags %>
+  <!-- Add any additional meta tags, stylesheets, or scripts here -->
+</head>
+<body>
+
+  <header>
+    <nav>
+      <ul>
+        <li><%= link_to 'Home', root_path %></li>
+        <!-- Add additional navigation links as needed -->
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h1>Welcome to My Rails Application!</h1>
+      <p>This is the root path. You can customize this page based on your application's needs.</p>
+    </section>
+    <!-- Add more sections or content as needed -->
+  </main>
+
+  <footer>
+    <p>&copy; <%= Time.now.year %> My Rails Application. All rights reserved.</p>
+    <% if current_user && current_user.provider %>
+      <%= image_tag(current_user.avatar_url) %>
+      <h2><%= current_user.email %></h2>
+      <h3><%= "Olá #{current_user.full_name}" %></h3>
+      <%= link_to "Editar conta", edit_user_registration_path %>
+      <%= link_to "Sign out", destroy_user_session_path %>
+    <% elsif current_user %>
+      <h2><%= current_user.email %></h2>
+      <h3><%= "Olá #{current_user.full_name}" %></h3>
+      <%= link_to "Editar conta", edit_user_registration_path %>
+      <%= link_to "Sign out", destroy_user_session_path %>
+    <% else %>
+      <%= link_to "Login", new_user_session_path %>
+      <%= link_to "Criar conta", new_user_registration_path %>
+    <% end %>
+  </footer>
+
+</body>
+</html>
