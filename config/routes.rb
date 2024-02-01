@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   
   get 'app_auth/codigo' => 'app_auth#codigo'
   post 'app_auth/validar_chave' => 'app_auth#validar_chave'
+  get 'app_auth/credenciais_organizer' => 'app_auth#credenciais_organizer'
 end
