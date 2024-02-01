@@ -8,7 +8,7 @@ class AppAuthController < ApplicationController
   end
 
   def validar_chave
-    return render(json: { message: 'Credenciais inválidas!' }, status: 400) unless @app&.authenticate_key(params[:chave])
+    return render(json: { message: 'Chave ou código inválido!' }, status: 400) unless @app&.authenticate_key(params[:chave])
 
     return erro_key_expirada unless @app.prazo_valido?
 
