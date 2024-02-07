@@ -1,4 +1,5 @@
 class AppAuthController < ApplicationController
+  before_action :authenticate_app!, only: [:credenciais_organizador]
   before_action :set_app_auth, only: [:validar_chave]
 
   def codigo
@@ -14,6 +15,10 @@ class AppAuthController < ApplicationController
 
     @app.ativar!
     render(json: { token: Jwt::Base.encode({ id: @app.id }) })
+  end
+
+  def credenciais_organizador
+    render(json: { nome_funcionario: @app.employee_name, celula: @app.celula })
   end
 
   private
