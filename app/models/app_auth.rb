@@ -16,6 +16,14 @@ class AppAuth < ApplicationRecord
     self.save
   end
 
+  def gerar_key!
+    self.key = Random.alphanumeric(44)
+    self.last_created_key_at = Time.new
+
+    self.save
+    key
+  end
+
   private
 
   def code_generate
