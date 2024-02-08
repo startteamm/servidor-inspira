@@ -1,6 +1,6 @@
 module Jwt
   class Base
-    SECRET = "asfkdljr2u89543=45[we[fwpf=3405390erowfklznc[kmnbcvxzs]]"
+    SECRET = ENV['SECRET_KEY']
 
     def self.encode(payload)
       JWT.encode(payload, SECRET, 'HS256')
