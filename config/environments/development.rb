@@ -8,17 +8,16 @@ Rails.application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.enable_reloading = true
 
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 } # Update with your actual host and port
+  config.x.mail_from = %(Inspira Design <naoresponda@inspiradesignuff.com>)
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-  address: 'smtp.gmail.com',
-    port: 587,
-    domain: 'inspiradesignuff.com.br', # Update with your actual domain
-    user_name: 'rbarroso@id.uff.br', # Your Gmail email address
-    password: 'digorbr910', # Your Gmail password or app-specific password
-    authentication: 'plain',
-  }
+  config.action_mailer.smtp_settings = { address: 'email-smtp.us-east-1.amazonaws.com', port: 587,
+                                         user_name: 'AKIA2UC3DCLF4DFHNJ33',
+                                         password: 'BHp/hLqIiFw05MQ8/A+lBT27x1wLpnQYYFMpZNLpud9J',
+                                         authentcation: :login,
+                                         enable_starttls_auto: true }
+  config.action_mailer.raise_delivery_errors = true
 
 
   # Do not eager load code on boot.
