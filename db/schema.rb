@@ -16,7 +16,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_19_234627) do
     t.string "encrypted_password", default: "", null: false
     t.string "full_name", default: "", null: false
     t.string "phone", default: "", null: false
-    t.string "university", default: "", null: false
+    t.string "university"
+    t.datetime "birth_date"
+    t.string "gender"
+    t.string "badge_name"
+    t.string "nationality"
+    t.string "rg"
+    t.string "cpf"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -31,6 +37,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_19_234627) do
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["rg", "cpf"], name: "index_users_on_rg_and_cpf", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 

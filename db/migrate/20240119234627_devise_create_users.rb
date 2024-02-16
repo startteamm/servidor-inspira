@@ -9,7 +9,14 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
 
       t.string :full_name, null: false, default: ""
       t.string :phone, null: false, default: ""
-      t.string :university, null: false, default: ""
+      t.string :university
+      t.datetime :birth_date
+      t.string :gender
+      t.string :badge_name
+      t.string :nationality
+      t.string :rg
+      t.string :cpf
+
 
       ## Recoverable
       t.string   :reset_password_token
@@ -48,6 +55,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
     add_index :users, :reset_password_token, unique: true
     add_index :users, :confirmation_token,   unique: true
     add_index :users, [:uid, :provider],     unique: true
+    add_index :users, [:rg, :cpf],           unique: true
     # add_index :users, :unlock_token,         unique: true
   end
 end

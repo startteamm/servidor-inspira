@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { 
-    registrations: "users/registrations",
+  devise_for :users, path: "usuario", controllers: { 
+    registrations: "users/registrations", 
     sessions: "users/sessions",
     omniauth_callbacks: 'users/omniauth_callbacks' 
-  }
+  }, path_names: { sign_up: 'cadastro', sign_in: 'login', sign_out: 'sair', password: 'senha',
+                   new: 'criar', cancel: 'cancelar', confirmation: 'confirmacao'}
+                   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
