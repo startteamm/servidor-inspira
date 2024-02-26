@@ -23,6 +23,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_19_234627) do
     t.string "nationality"
     t.string "rg"
     t.string "cpf"
+    t.boolean "admin", default: false, null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

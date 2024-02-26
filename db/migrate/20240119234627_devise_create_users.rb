@@ -16,6 +16,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
       t.string :nationality
       t.string :rg
       t.string :cpf
+      t.boolean :admin, null: false, default: false
 
 
       ## Recoverable
