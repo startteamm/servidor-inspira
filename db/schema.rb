@@ -10,7 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_19_234627) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_26_233532) do
+  create_table "activities", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "image"
+    t.string "title", null: false
+    t.date "date", default: "2024-02-26", null: false
+    t.time "time", default: "2000-01-01 00:37:38", null: false
+    t.string "speaker_name"
+    t.string "speaker_surname"
+    t.string "speaker_job"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "activity_types", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "title", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "activity_id"
+    t.index ["activity_id"], name: "index_activity_types_on_activity_id"
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -42,4 +62,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_19_234627) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "activity_types", "activities"
 end

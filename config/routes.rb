@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :activities
   devise_for :users, path: "usuario", controllers: { 
     registrations: "users/registrations", 
     sessions: "users/sessions",
