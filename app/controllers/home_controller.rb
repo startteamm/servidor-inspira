@@ -1,7 +1,5 @@
 class HomeController < ApplicationController
-    def index
-        respond_to do |format|
-            format.html # Render HTML view
-        end
-    end
+  def index
+    render json: { message: 'Bem-vindo a Inspira Design' }
+  end
 end

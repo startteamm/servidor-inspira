@@ -8,6 +8,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
       t.string :encrypted_password, null: false, default: ""
 
       t.string :full_name, null: false, default: ""
+      t.integer :role, null: false, default: 0
       t.string :phone, null: false, default: ""
       t.string :university
       t.datetime :birth_date
@@ -16,7 +17,6 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
       t.string :nationality
       t.string :rg
       t.string :cpf
-      t.boolean :admin, null: false, default: false
 
 
       ## Recoverable
