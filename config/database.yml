@@ -56,3 +56,4 @@ production:
   password: <%= Rails.application.credentials.database[:my_sql_root_password] %>
   port: <%= Rails.application.credentials.database[:my_sql_port] %>
   url: <%= Rails.application.credentials.database[:my_sql_url] %>
+  
