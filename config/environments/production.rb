@@ -6,10 +6,17 @@ Rails.application.configure do
   # Code is not reloaded between requests.
   config.enable_reloading = false
 
-  config.x.mail_from = %(Inspira Design <naoresponda@inspiradesignuff.com>)
-  config.action_mailer.default_url_options = { host: 'inspiradesignuff.com' }
-  config.action_mailer.smtp_settings = { address: 'email-smtp.us-east-1.amazonaws.com', user_name: 'AKIA2UC3DCLF4DFHNJ33', password: 'BHp/hLqIiFw05MQ8/A+lBT27x1wLpnQYYFMpZNLpud9J' }
-  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.gmail.com',
+    port: 587,
+    domain: 'inspiradesignuff.com',
+    user_name: Rails.application.credentials.dig(:google, :mailer_email),
+    password: Rails.application.credentials.dig(:google, :mailer_email_password),
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
+
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
