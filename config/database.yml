@@ -12,9 +12,8 @@
 default: &default
   adapter: mysql2
   encoding: utf8mb4
-  pool: 5
-  username: root
-  password:
+  username: <%= Rails.application.credentials.database[:my_sql_user] %>
+  password: <%= Rails.application.credentials.database[:my_sql_root_password] %>
   socket: /var/run/mysqld/mysqld.sock
 
 development:
