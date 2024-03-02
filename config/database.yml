@@ -12,9 +12,7 @@
 default: &default
   adapter: mysql2
   encoding: utf8mb4
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: barroso
-  password: digorbr910
+  pool: 5
   socket: /var/run/mysqld/mysqld.sock
 
 development:
@@ -50,6 +48,9 @@ test:
 #
 production:
   <<: *default
-  database: sistema_inspira_production
-  username: sistema_inspira
-  password: <%= ENV["SISTEMA_INSPIRA_DATABASE_PASSWORD"] %>
+  database: <%= Rails.application.credentials.database[:my_sql_database] %>
+  host: <%= Rails.application.credentials.database[:my_sql_host] %>
+  username: <%= Rails.application.credentials.database[:my_sql_user] %>
+  password: <%= Rails.application.credentials.database[:my_sql_root_password] %>
+  port: <%= Rails.application.credentials.database[:my_sql_port] %>
+  url: <%= Rails.application.credentials.database[:my_sql_url] %>
