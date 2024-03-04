@@ -3,9 +3,7 @@ class Ticket < ApplicationRecord
 
   has_secure_token :code
 
-  def validado?
-    validated
-  end
+  validates :code, uniqueness: { case_sensitive: false }
 
   def validar!
     self.validated = true
