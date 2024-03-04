@@ -8,6 +8,18 @@ Rails.application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.enable_reloading = true
 
+  config.x.mail_from = %(Inspira Design <naoresponda@inspiradesignuff.com>)
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = { address: 'email-smtp.us-east-1.amazonaws.com', port: 587,
+                                         user_name: 'AKIA2UC3DCLF4DFHNJ33',
+                                         password: 'BHp/hLqIiFw05MQ8/A+lBT27x1wLpnQYYFMpZNLpud9J',
+                                         authentcation: :login,
+                                         enable_starttls_auto: true }
+  config.action_mailer.raise_delivery_errors = true
+
+
   # Do not eager load code on boot.
   config.eager_load = false
 
@@ -34,7 +46,7 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.perform_caching = false
 
