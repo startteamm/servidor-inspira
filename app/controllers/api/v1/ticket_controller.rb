@@ -13,7 +13,7 @@ module Api
 
       def create
         ticket = Ticket.new(params_ticket)
-        
+
         if ticket.save
           render(json: ticket)
         else
@@ -34,7 +34,7 @@ module Api
       end
 
       def qrcode
-        path = "/tmp/qrcode-#{SecureRandom.alphanumeric(10)}.png"
+        tmp_file = Tempfile.new(["qrcode-#{SecureRandom.alphanumeric(10)}", '.png'])
 
         qrcode = RQRCode::QRCode.new(@ticket.code)
       
@@ -50,22 +50,23 @@ module Api
           resize_gte_to: false,
           size: 120
         )
-      
-        IO.binwrite(path, png.to_s)
-      
-        send_file(path)
+
+        IO.binwrite(tmp_file.path, png.to_s)
+
+        send_file(tmp_file.path)
+        tmp_file.close
       end
-    
+
       def validar_ingresso
         @ticket = Ticket.find_by(code: params[:code])
 
         return head(:not_found) if @ticket.nil?
-      
-        unless @ticket.validado?
+
+        unless @ticket.validated?
           @ticket.validar!
           return head(:ok)
         end
-      
+
         render(json: { messagem: 'Ingresso já foi validado.'}, status: :bad_request)
       end
 
