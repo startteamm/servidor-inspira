@@ -10,28 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_02_180235) do
-  create_table "activities", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "image"
-    t.string "title", null: false
-    t.date "date", default: "2024-02-26", null: false
-    t.time "time", default: "2000-01-01 00:37:38", null: false
-    t.string "speaker_name"
-    t.string "speaker_surname"
-    t.string "speaker_job"
+ActiveRecord::Schema[7.1].define(version: 2024_03_04_005249) do
+  create_table "app_auths", id: :string, default: -> { "uuid()" }, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "employee_name"
+    t.integer "celula"
+    t.string "code", null: false
+    t.string "key_digest"
+    t.timestamp "last_created_key_at"
+    t.boolean "ativo", default: false
+    t.timestamp "activation_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "activity_types", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "title", default: 0
+  create_table "tickets", id: :string, default: -> { "uuid()" }, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "code"
+    t.boolean "validated", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "activity_id"
-    t.index ["activity_id"], name: "index_activity_types_on_activity_id"
+    t.bigint "type_ticket_id", null: false
+    t.index ["code"], name: "index_tickets_on_code", unique: true
+    t.index ["type_ticket_id"], name: "index_tickets_on_type_ticket_id"
   end
 
-  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "type_tickets", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.float "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "full_name", default: "", null: false
@@ -62,5 +72,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_02_180235) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
-  add_foreign_key "activity_types", "activities"
+  add_foreign_key "tickets", "type_tickets"
 end
