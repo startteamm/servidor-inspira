@@ -1,6 +1,6 @@
 module Api
   module V1
-    class TicketController < ApplicationController
+    class TicketsController < ApplicationController
       before_action :set_ticket, only: %i[show update destroy qrcode]
 
       def index

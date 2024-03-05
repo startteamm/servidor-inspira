@@ -1,6 +1,6 @@
 module Api
   module V1
-    class TypeTicketController < ApplicationController
+    class TypeTicketsController < ApplicationController
       before_action :set_type_ticket, only: %i[show update destroy]
 
       def index
