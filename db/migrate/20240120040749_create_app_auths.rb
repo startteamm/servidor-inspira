@@ -1,7 +1,6 @@
 class CreateAppAuths < ActiveRecord::Migration[7.1]
   def change
-    create_table :app_auths, id: false do |t|
-      t.string :id, null: false, primary_key: true, default: -> { "UUID()" }
+    create_table :app_auths do |t|
       t.string :employee_name
       t.integer :celula
       t.string :code, null: false

@@ -11,7 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.1].define(version: 2024_03_04_005249) do
-  create_table "app_auths", id: :string, default: -> { "uuid()" }, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+  create_table "app_auths", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "employee_name"
     t.integer "celula"
     t.string "code", null: false
