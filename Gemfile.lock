@@ -75,6 +75,8 @@ GEM
       minitest (>= 5.1)
       mutex_m
       tzinfo (~> 2.0)
+    addressable (2.8.6)
+      public_suffix (>= 2.0.2, < 6.0)
     base64 (0.2.0)
     bcrypt (3.1.20)
     bigdecimal (3.1.6)
@@ -96,6 +98,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    diff-lcs (1.5.1)
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
@@ -117,6 +120,8 @@ GEM
     irb (1.11.1)
       rdoc
       reline (>= 0.4.2)
+    json-schema (4.1.1)
+      addressable (>= 2.8)
     jwt (2.7.1)
     loofah (2.22.0)
       crass (~> 1.0.2)
@@ -172,10 +177,13 @@ GEM
     orm_adapter (0.5.0)
     psych (5.1.2)
       stringio
+    public_suffix (5.0.4)
     puma (6.4.2)
       nio4r (~> 2.0)
     racc (1.7.3)
     rack (3.0.8)
+    rack-cors (2.0.2)
+      rack (>= 2.0.0)
     rack-protection (4.0.0)
       base64 (>= 0.1.0)
       rack (>= 3.0.0, < 4)
@@ -227,6 +235,34 @@ GEM
       chunky_png (~> 1.0)
       rqrcode_core (~> 1.0)
     rqrcode_core (1.2.0)
+    rspec-core (3.13.0)
+      rspec-support (~> 3.13.0)
+    rspec-expectations (3.13.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-mocks (3.13.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-rails (6.1.1)
+      actionpack (>= 6.1)
+      activesupport (>= 6.1)
+      railties (>= 6.1)
+      rspec-core (~> 3.12)
+      rspec-expectations (~> 3.12)
+      rspec-mocks (~> 3.12)
+      rspec-support (~> 3.12)
+    rspec-support (3.13.1)
+    rswag-api (2.13.0)
+      activesupport (>= 3.1, < 7.2)
+      railties (>= 3.1, < 7.2)
+    rswag-specs (2.13.0)
+      activesupport (>= 3.1, < 7.2)
+      json-schema (>= 2.2, < 5.0)
+      railties (>= 3.1, < 7.2)
+      rspec-core (>= 2.14)
+    rswag-ui (2.13.0)
+      actionpack (>= 3.1, < 7.2)
+      railties (>= 3.1, < 7.2)
     ruby2_keywords (0.0.5)
     snaky_hash (2.0.1)
       hashie
@@ -263,8 +299,13 @@ DEPENDENCIES
   omniauth-google-oauth2
   omniauth-rails_csrf_protection (~> 1.0)
   puma (>= 5.0)
+  rack-cors
   rails (~> 7.1.3)
   rqrcode
+  rspec-rails
+  rswag-api
+  rswag-specs
+  rswag-ui
   tzinfo-data
 
 RUBY VERSION

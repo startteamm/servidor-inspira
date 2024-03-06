@@ -1,0 +1,325 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/tickets":
+    get:
+      summary: list all Tickets
+      tags:
+      - Api::V1::Tickets
+      responses:
+        '200':
+          description: Tickets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    code:
+                      type: string
+                    validated:
+                      type: text
+                    created_at:
+                      type: string
+                    updated_at:
+                      type: string
+                    type_ticket_id:
+                      type: integer
+    post:
+      summary: Create Ticket
+      tags:
+      - Api::V1::Tickets
+      parameters: []
+      responses:
+        '201':
+          description: Ticket created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type_ticket_id:
+                  type: integer
+              required:
+              - type_ticket_id
+  "/api/v1/tickets/{id}":
+    get:
+      summary: show ticket
+      tags:
+      - Api::V1::Tickets
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Ticket found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  description:
+                    type: text
+                  value:
+                    type: float
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+        '404':
+          description: Ticket not found
+    patch:
+      summary: update ticket
+      tags:
+      - Api::V1::Tickets
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Ticket updated
+        '422':
+          description: invalid request
+        '404':
+          description: Ticket not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type_ticket_id:
+                  type: integer
+    put:
+      summary: update ticket
+      tags:
+      - Api::V1::Tickets
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Ticket updated
+        '422':
+          description: invalid request
+        '404':
+          description: Ticket not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type_ticket_id:
+                  type: integer
+    delete:
+      summary: delete ticket
+      tags:
+      - Api::V1::Tickets
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: deleted
+        '404':
+          description: Ticket not found
+  "/api/v1/type_tickets":
+    get:
+      summary: list all type tickets
+      tags:
+      - Api::V1::TypeTickets
+      responses:
+        '200':
+          description: type tickets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    description:
+                      type: text
+                    value:
+                      type: float
+                    created_at:
+                      type: string
+                    updated_at:
+                      type: string
+    post:
+      summary: Create type ticket
+      tags:
+      - Api::V1::TypeTickets
+      parameters: []
+      responses:
+        '201':
+          description: Type Ticket created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: text
+                value:
+                  type: float
+              required:
+              - name
+              - value
+  "/api/v1/type_tickets/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show ticket
+      tags:
+      - Api::V1::TypeTickets
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: type ticket found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  description:
+                    type: text
+                  value:
+                    type: float
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+                required:
+                - id
+                - name
+                - value
+        '404':
+          description: type ticket not found
+    patch:
+      summary: update type_ticket
+      tags:
+      - Api::V1::TypeTickets
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Type Ticket updated
+        '422':
+          description: invalid request
+        '404':
+          description: type ticket not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: text
+                value:
+                  type: float
+    put:
+      summary: update type_ticket
+      tags:
+      - Api::V1::TypeTickets
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Type Ticket updated
+        '422':
+          description: invalid request
+        '404':
+          description: type ticket not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: text
+                value:
+                  type: float
+    delete:
+      summary: delete type_ticket
+      tags:
+      - Api::V1::TypeTickets
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: deleted
+        '404':
+          description: type ticket not found
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000

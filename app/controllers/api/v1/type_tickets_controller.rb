@@ -1,6 +1,6 @@
 module Api
   module V1
-    class TypeTicketController < ApplicationController
+    class TypeTicketsController < ApplicationController
       before_action :set_type_ticket, only: %i[show update destroy]
 
       def index
@@ -15,7 +15,7 @@ module Api
         type_ticket = TypeTicket.new(params_type_ticket)
         
         if type_ticket.save
-          render(json: type_ticket)
+          render(json: type_ticket, status: :created)
         else
           render(json: type_ticket.errors, status: :unprocessable_entity)
         end
@@ -25,7 +25,7 @@ module Api
         if @type_ticket.update(params_type_ticket)
           render(json: @type_ticket)
         else
-          render(json: type_ticket.errors, status: :unprocessable_entity)
+          render(json: @type_ticket.errors, status: :unprocessable_entity)
         end
       end
 

@@ -14,6 +14,8 @@ default: &default
   encoding: utf8mb4
   pool: 5
   socket: /var/run/mysqld/mysqld.sock
+  username: <%= ENV.fetch("USERNAME_DB") %>
+  password: <%= ENV.fetch("PASSWORD_DB") %>
 
 development:
   <<: *default

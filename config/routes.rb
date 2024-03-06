@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  mount Rswag::Ui::Engine => '/api-docs'
+  mount Rswag::Api::Engine => '/api-docs'
+
   root 'home#index'
   devise_for :users, path: "usuario", controllers: { 
     registrations: "users/registrations", 
@@ -23,10 +26,10 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :type_ticket
-      resources :ticket
-      get 'ticket/:id/qrcode', to: 'ticket#qrcode'
-      put 'ticket/:code/validar_ingresso', to: 'ticket#validar_ingresso'
+      resources :type_tickets
+      resources :tickets
+      get 'tickets/:id/qrcode', to: 'tickets#qrcode'
+      put 'tickets/:code/validar_ingresso', to: 'tickets#validar_ingresso'
     end
   end
 
