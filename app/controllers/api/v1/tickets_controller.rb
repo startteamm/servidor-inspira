@@ -15,7 +15,7 @@ module Api
         ticket = Ticket.new(params_ticket)
 
         if ticket.save
-          render(json: ticket)
+          render(json: ticket, status: :created)
         else
           render(json: ticket.errors, status: :unprocessable_entity)
         end
@@ -25,7 +25,7 @@ module Api
         if @ticket.update(params_ticket)
           render(json: @ticket)
         else
-          render(json: ticket.errors, status: :unprocessable_entity)
+          render(json: @ticket.errors, status: :unprocessable_entity)
         end
       end
 
