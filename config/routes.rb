@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks' 
   }, path_names: { sign_up: 'cadastro', sign_in: 'login', sign_out: 'sair', password: 'senha',
                    new: 'criar', cancel: 'cancelar', confirmation: 'confirmacao'}
+  resources :activities
                    
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
