@@ -17,7 +17,7 @@ Rails.application.configure do
     enable_starttls_auto: true
   }
 
-  config.action_mailer.default_url_options = { host: "https://servidor-inspira-production.up.railway.app" }
+  config.action_mailer.default_url_options = { host: "https://inspiradesignuff.com" }
 
 
   # Eager load code on boot. This eager loads most of Rails and
