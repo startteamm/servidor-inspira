@@ -14,6 +14,8 @@ class User < ApplicationRecord
   enum role: [:regular, :admin]
   enum gender: %i[homem_cis mulher_cis homem_trans 
                   mulher_trans nao_binario agenero neutro outro]
+  
+  validates :email, uniqueness: { case_sensitive: false }
   # validates :full_name, presence: true
 
   # def self.from_omniauth(auth)
