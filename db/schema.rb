@@ -10,28 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_08_015440) do
-  create_table "activities", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "image"
-    t.string "title", null: false
-    t.date "date", default: "2024-03-06", null: false
-    t.time "time", default: "2000-01-01 01:22:28", null: false
-    t.string "speaker_name"
-    t.string "speaker_surname"
-    t.string "speaker_job"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "activity_types", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "title", default: "", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "activity_id"
-    t.index ["activity_id"], name: "index_activity_types_on_activity_id"
-  end
-
-  create_table "app_auths", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+ActiveRecord::Schema[7.0].define(version: 2024_03_04_005249) do
+  create_table "app_auths", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "employee_name"
     t.integer "celula"
     t.string "code", null: false
@@ -43,7 +23,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_08_015440) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "tickets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "tickets", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "code"
     t.boolean "validated", default: false
     t.datetime "created_at", null: false
@@ -53,7 +33,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_08_015440) do
     t.index ["type_ticket_id"], name: "index_tickets_on_type_ticket_id"
   end
 
-  create_table "type_tickets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "type_tickets", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.float "value"
@@ -61,37 +41,41 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_08_015440) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "email", null: false
-    t.string "encrypted_password", null: false
-    t.string "full_name", null: false
-    t.integer "role", default: 0, null: false
-    t.string "phone", null: false
-    t.string "university"
-    t.datetime "birth_date"
-    t.string "gender"
-    t.string "badge_name"
-    t.string "nationality"
-    t.string "rg"
-    t.string "cpf"
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "provider", default: "email", null: false
+    t.string "uid", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
+    t.boolean "allow_password_change", default: false
     t.datetime "remember_created_at"
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string "provider"
-    t.string "uid"
-    t.string "avatar_url"
+    t.string "unconfirmed_email"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.string "full_name"
+    t.string "email", default: "", null: false
+    t.integer "role", default: 0, null: false
+    t.string "phone", default: "", null: false
+    t.string "university"
+    t.datetime "birth_date"
+    t.integer "gender"
+    t.string "nationality"
+    t.string "rg"
+    t.string "cpf"
+    t.text "tokens"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["rg", "cpf"], name: "index_users_on_rg_and_cpf", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
-  add_foreign_key "activity_types", "activities"
   add_foreign_key "tickets", "type_tickets"
 end
