@@ -1,4 +1,4 @@
-class CreateAppAuths < ActiveRecord::Migration[7.1]
+class CreateAppAuths < ActiveRecord::Migration[7.0]
   def change
     create_table :app_auths do |t|
       t.string :employee_name

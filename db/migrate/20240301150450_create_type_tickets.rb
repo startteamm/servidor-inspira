@@ -1,4 +1,4 @@
-class CreateTypeTickets < ActiveRecord::Migration[7.1]
+class CreateTypeTickets < ActiveRecord::Migration[7.0]
   def change
     create_table :type_tickets do |t|
       t.string :name
