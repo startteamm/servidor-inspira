@@ -6,7 +6,7 @@ DeviseTokenAuth.setup do |config|
   # this to false to prevent the Authorization header from changing after
   # each request.
   # alterar para produção
-  config.change_headers_on_each_request = false
+  config.change_headers_on_each_request = Rails.env.development? ? true : false
 
   # By default, users will need to re-authenticate after 2 weeks. This setting
   # determines how long tokens will remain valid after they are issued.
@@ -68,16 +68,14 @@ DeviseTokenAuth.setup do |config|
   # By default this value is expected to be sent by the client so # that the API knows where to redirect users after successful
   # email confirmation. If this param is set, the API will 
   # redirect to this value when no value is provided by the client.
-  config.default_confirm_success_url = 'http://localhost:3000/login'
+  config.default_confirm_success_url = 'https://www.inspiradesignuff.com'
 
   # By default this value is expected to be sent by the client so that the API knows where 
   # to redirect users after successful password resets. If this param is set, the API will
   # redirect to this value when no value is provided by the # client.
-  config.default_password_reset_url = 'http://localhost:3000/reset-password'
+  # config.default_password_reset_url = 'https://www.inspiradesignuff.com/reset-password'
 
   # By default, old tokens are not invalidated when password is changed. 
   # Enable this option if you want to make passwords updates to logout other devices.
   config.remove_tokens_after_password_reset = true
-
-
 end

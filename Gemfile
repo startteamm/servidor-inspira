@@ -46,7 +46,6 @@ gem 'devise_token_auth'
 # gem 'omniauth-google-oauth2'
 # gem "omniauth-rails_csrf_protection", "~> 1.0"
 
-gem 'letter_opener'
 
 # documentação de rotas
 gem 'rswag-api'
@@ -59,6 +58,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'rspec-rails'
   gem 'rswag-specs'
+  gem 'letter_opener'
 end
 
 group :development do
