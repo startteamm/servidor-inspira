@@ -10,25 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_07_011812) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_23_033324) do
   create_table "activities", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "image"
     t.string "title", null: false
-    t.date "date", default: "2024-03-06", null: false
-    t.time "time", default: "2000-01-01 01:22:28", null: false
-    t.string "speaker_name"
-    t.string "speaker_surname"
-    t.string "speaker_job"
+    t.date "date", null: false
+    t.time "time", null: false
+    t.string "speakers_full_name", null: false
+    t.string "speakers_jobs", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "activity_type_id"
+    t.index ["activity_type_id"], name: "index_activities_on_activity_type_id"
+  end
+
+  create_table "activities_users", id: false, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "activity_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_activities_users_on_activity_id"
+    t.index ["user_id"], name: "index_activities_users_on_user_id"
   end
 
   create_table "activity_types", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "title", default: "", null: false
+    t.string "title", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "activity_id"
-    t.index ["activity_id"], name: "index_activity_types_on_activity_id"
   end
 
   create_table "app_auths", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -92,6 +100,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_07_011812) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
-  add_foreign_key "activity_types", "activities"
+  add_foreign_key "activities", "activity_types"
   add_foreign_key "tickets", "type_tickets"
 end
