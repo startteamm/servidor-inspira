@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::API
+  include DeviseTokenAuth::Concerns::SetUserByToken
+
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def erro_key_expirada
@@ -14,6 +16,7 @@ class ApplicationController < ActionController::API
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:full_name, :phone, :provider, :uid])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:full_name, :phone, :phone, :university,
+                                                       :birth_date, :gender, :nationality, :rg, :cpf])
   end
 end
