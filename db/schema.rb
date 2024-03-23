@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_04_005249) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_07_042606) do
   create_table "app_auths", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "employee_name"
     t.integer "celula"
@@ -19,6 +19,25 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_005249) do
     t.timestamp "last_created_key_at"
     t.boolean "ativo", default: false
     t.timestamp "activation_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "events", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.string "link"
+    t.integer "status"
+    t.date "start_date", null: false
+    t.date "end_date", null: false
+    t.string "cep"
+    t.string "street"
+    t.string "city"
+    t.string "neighborhood"
+    t.string "link_google_maps"
+    t.boolean "publico", default: false
+    t.date "start_date_sale_ticket"
+    t.date "end_date_sale_ticket"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -39,6 +58,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_005249) do
     t.float "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "event_id", null: false
+    t.index ["event_id"], name: "index_type_tickets_on_event_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -73,4 +94,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_005249) do
   end
 
   add_foreign_key "tickets", "type_tickets"
+  add_foreign_key "type_tickets", "events"
 end
