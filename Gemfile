@@ -3,7 +3,7 @@ source "https://rubygems.org"
 ruby "3.1.3"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.1.3"
+gem "rails", "~> 7.0.8.1"
 
 # Use mysql as the database for Active Record
 gem "mysql2", "~> 0.5.6"
@@ -41,9 +41,11 @@ gem "rack-cors"
 
 # gems
 gem 'devise'
-gem 'omniauth'
-gem 'omniauth-google-oauth2'
-gem "omniauth-rails_csrf_protection", "~> 1.0"
+gem 'devise_token_auth'
+# gem 'omniauth'
+# gem 'omniauth-google-oauth2'
+# gem "omniauth-rails_csrf_protection", "~> 1.0"
+
 
 # documentação de rotas
 gem 'rswag-api'
@@ -56,6 +58,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'rspec-rails'
   gem 'rswag-specs'
+  gem 'letter_opener'
 end
 
 group :development do
