@@ -3,6 +3,8 @@ class User < ApplicationRecord
        :recoverable, :rememberable, :validatable,
        :omniauthable, :confirmable, omniauth_providers: [:google_oauth2]
 
+  has_and_belongs_to_many :activities
+
   enum role: [:regular, :admin]
 
   def self.from_omniauth(auth)
