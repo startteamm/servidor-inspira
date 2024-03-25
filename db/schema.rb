@@ -37,9 +37,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_23_033324) do
     t.string "title", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "app_auths", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+   
+  create_table "app_auths", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "employee_name"
     t.integer "celula"
     t.string "code", null: false
@@ -50,8 +49,27 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_23_033324) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+  
+  create_table "events", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.string "link"
+    t.integer "status"
+    t.date "start_date", null: false
+    t.date "end_date", null: false
+    t.string "cep"
+    t.string "street"
+    t.string "city"
+    t.string "neighborhood"
+    t.string "link_google_maps"
+    t.boolean "publico", default: false
+    t.date "start_date_sale_ticket"
+    t.date "end_date_sale_ticket"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
-  create_table "tickets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "tickets", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "code"
     t.boolean "validated", default: false
     t.datetime "created_at", null: false
@@ -67,39 +85,47 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_23_033324) do
     t.float "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "event_id", null: false
+    t.index ["event_id"], name: "index_type_tickets_on_event_id"
   end
 
-  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "email", default: "", null: false
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "provider", default: "email", null: false
+    t.string "uid", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.string "full_name", default: "", null: false
-    t.integer "role", default: 0, null: false
-    t.string "phone", default: "", null: false
-    t.string "university"
-    t.datetime "birth_date"
-    t.string "gender"
-    t.string "badge_name"
-    t.string "nationality"
-    t.string "rg"
-    t.string "cpf"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
+    t.boolean "allow_password_change", default: false
     t.datetime "remember_created_at"
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string "provider"
-    t.string "uid"
-    t.string "avatar_url"
+    t.string "unconfirmed_email"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.string "full_name"
+    t.string "email", default: "", null: false
+    t.integer "role", default: 0, null: false
+    t.string "phone", default: "", null: false
+    t.string "university"
+    t.datetime "birth_date"
+    t.integer "gender"
+    t.string "nationality"
+    t.string "rg"
+    t.string "cpf"
+    t.text "tokens"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["rg", "cpf"], name: "index_users_on_rg_and_cpf", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
   add_foreign_key "activities", "activity_types"
   add_foreign_key "tickets", "type_tickets"
+  add_foreign_key "type_tickets", "events"
 end
