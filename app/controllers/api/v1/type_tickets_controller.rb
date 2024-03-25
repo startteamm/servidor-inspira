@@ -40,7 +40,7 @@ module Api
       end
 
       def params_type_ticket
-        params.permit(:name, :description, :value)
+        params.permit(:name, :description, :value, :event_id)
       end
     end
   end
