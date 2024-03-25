@@ -1,4 +1,4 @@
-class CreateActivitiesAndUsers < ActiveRecord::Migration[7.1]
+class CreateActivitiesAndUsers < ActiveRecord::Migration[7.0]
   def change
     create_table :activities_users, id: false do |t|
       t.belongs_to :activity
