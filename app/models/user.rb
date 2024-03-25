@@ -7,7 +7,8 @@ class User < ApplicationRecord
          :recoverable,
          :rememberable,
          :trackable,
-         :validatable
+         :validatable,
+         :omniauthable, omniauth_providers: [:google_oauth2]
 
   include DeviseTokenAuth::Concerns::User
 
