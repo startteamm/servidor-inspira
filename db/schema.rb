@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_23_033324) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_25_041734) do
   create_table "activities", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "image"
     t.string "title", null: false
@@ -37,8 +37,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_23_033324) do
     t.string "title", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-   
-  create_table "app_auths", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+  end
+
+  create_table "app_auths", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "employee_name"
     t.integer "celula"
     t.string "code", null: false
@@ -49,8 +50,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_23_033324) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-  
-  create_table "events", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+
+  create_table "events", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
     t.string "link"
@@ -69,7 +70,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_23_033324) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "tickets", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+  create_table "tickets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "code"
     t.boolean "validated", default: false
     t.datetime "created_at", null: false
@@ -89,7 +90,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_23_033324) do
     t.index ["event_id"], name: "index_type_tickets_on_event_id"
   end
 
-  create_table "users", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -119,6 +120,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_23_033324) do
     t.text "tokens"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
