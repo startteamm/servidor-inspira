@@ -10,7 +10,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address: 'smtp.gmail.com',
     port: 587,
-    domain: 'inspiradesignuff.com',
+    domain: 'www.inspiradesignuff.com.br',
     user_name: Rails.application.credentials.dig(:google, :mailer_email),
     password: Rails.application.credentials.dig(:google, :mailer_email_password),
     authentication: :plain,

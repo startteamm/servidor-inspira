@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   root 'home#index'
-  
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
@@ -23,6 +22,7 @@ Rails.application.routes.draw do
       resources :events
       resources :type_tickets
       resources :tickets
+      resources :activities
       get 'tickets/:id/qrcode', to: 'tickets#qrcode'
       put 'tickets/:code/validar_ingresso', to: 'tickets#validar_ingresso'
     end
