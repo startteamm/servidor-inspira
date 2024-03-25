@@ -11,6 +11,8 @@ class User < ApplicationRecord
 
   include DeviseTokenAuth::Concerns::User
 
+  has_and_belongs_to_many :activities
+
   enum role: [:regular, :admin]
   enum gender: %i[homem_cis mulher_cis homem_trans 
                   mulher_trans nao_binario agenero neutro outro]
