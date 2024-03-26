@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_04_005249) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_07_042606) do
   create_table "app_auths", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "employee_name"
     t.integer "celula"
@@ -56,6 +56,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_04_005249) do
     t.string "name"
     t.text "description"
     t.float "value"
+    t.integer "sale_type"
+    t.integer "limit"
+    t.boolean "publico", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "event_id", null: false
@@ -80,15 +83,17 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_04_005249) do
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.string "full_name"
-    t.string "email", default: "", null: false
+    t.string "email", null: false
     t.integer "role", default: 0, null: false
-    t.string "phone", default: "", null: false
+    t.string "phone", null: false
     t.string "university"
-    t.datetime "birth_date"
+    t.date "birth_date"
     t.integer "gender"
     t.string "nationality"
     t.string "rg"
     t.string "cpf"
+    t.string "address"
+    t.boolean "validate_account_update_params", default: false
     t.text "tokens"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
