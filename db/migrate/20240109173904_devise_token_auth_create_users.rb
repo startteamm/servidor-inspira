@@ -36,15 +36,18 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[7.0]
 
       ## User Info
       t.string :full_name
-      t.string :email, null: false, default: ''
+      t.string :email, null: false
       t.integer :role, null: false, default: 0
-      t.string :phone, null: false, default: ""
+      t.string :phone, null: false
       t.string :university
-      t.datetime :birth_date
+      t.date :birth_date
       t.integer :gender
       t.string :nationality
       t.string :rg
       t.string :cpf
+      t.string :address
+
+      t.boolean :validate_account_update_params, default: false
 
       ## Tokens
       t.text :tokens
