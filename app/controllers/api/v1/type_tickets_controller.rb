@@ -1,6 +1,7 @@
 module Api
   module V1
     class TypeTicketsController < ApiController
+      skip_before_action :authenticate_api_user!, only: [:index]
       before_action :set_type_ticket, only: %i[show update destroy]
 
       def index
@@ -13,7 +14,7 @@ module Api
 
       def create
         type_ticket = TypeTicket.new(params_type_ticket)
-        
+
         if type_ticket.save
           render(json: type_ticket, status: :created)
         else
