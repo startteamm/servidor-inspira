@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   end
   
   namespace :api, defaults: { format: :json } do
-    mount_devise_token_auth_for 'User', at: 'auth'
+    mount_devise_token_auth_for 'User', at: 'auth', controllers: { omniauth_callbacks: "api/v1/omniauth_callbacks" }
 
     namespace :v1 do
       resources :events

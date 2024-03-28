@@ -42,8 +42,7 @@ gem "rack-cors"
 # gems
 gem 'devise'
 gem 'devise_token_auth'
-# gem 'omniauth'
-# gem 'omniauth-google-oauth2'
+gem 'omniauth-google-oauth2'
 # gem "omniauth-rails_csrf_protection", "~> 1.0"
 
 
