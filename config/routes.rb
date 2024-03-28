@@ -22,15 +22,17 @@ Rails.application.routes.draw do
       resources :events
       resources :type_tickets
       resources :tickets
-      resources :activities
+      resources :activities, except: [:index]
       get 'tickets/:id/qrcode', to: 'tickets#qrcode'
       put 'tickets/:code/validar_ingresso', to: 'tickets#validar_ingresso'
     end
   end
 
+  resources :activities, module: 'api/v1', only: [:index], path: 'programacao'
+  
+
   # get '/lojinha', to: 'shop#index'
   # get '/ingressos', to: 'ticket#index'
-  # get '/programacao', to: 'schedule#index'
   # get '/quem-somos', to: 'about#index'
   # get '/ultimas-edicoes', to: 'about#past_events'
   # get '/equipes', to: 'about#teams'

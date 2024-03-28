@@ -1,13 +1,25 @@
 module Api
   module V1
   class ActivitiesController < ApiController
+      skip_before_action :authenticate_api_user!, only: [:index]
       before_action :set_activity, only: %i[ show update destroy ]
     
       # GET /activities
       def index
+        # Fetch all records from the database
         @activities = Activity.all
     
-        render json: @activities
+        # Group the records into groups of six
+        @activity_groups = @activities.each_slice(6).to_a
+    
+        # Name each group
+        @activity_groups.each_with_index do |group, index|
+          group_name = "#{index + 1}" # Naming each group as "Dia 1", "Dia 2", ...
+          group.instance_variable_set(:@group_name, group_name)
+        end
+    
+        # Render each group of records in JSON format with their respective names
+        render json: @activity_groups.map { |group| { day: group.instance_variable_get(:@group_name).to_i, activities: group } }
       end
     
       # GET /activities/1
