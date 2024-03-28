@@ -11,7 +11,8 @@ class User < ApplicationRecord
          :recoverable,
          :rememberable,
          :trackable,
-         :validatable
+         :validatable,
+         :omniauthable, omniauth_providers: [:google_oauth2]
 
   enum role: %i[participante admin]
   enum gender: %i[homem_cis mulher_cis homem_trans mulher_trans nao_binario agenero neutro outro]
