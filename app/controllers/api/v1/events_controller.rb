@@ -1,6 +1,6 @@
 module Api
   module V1
-    class EventsController < ApplicationController
+    class EventsController < ApiController
       before_action :set_event, only: %i[show update destroy]
 
       def index
