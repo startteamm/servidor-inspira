@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_25_041734) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_29_124203) do
   create_table "activities", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
@@ -19,15 +19,21 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_25_041734) do
     t.date "date", null: false
     t.string "workload", null: false
     t.time "start_time", null: false
-    t.string "guest_full_name", null: false
-    t.string "guest_email", null: false
-    t.text "guest_description", null: false
     t.string "location", null: false
     t.integer "capacity", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "activity_type_id"
     t.index ["activity_type_id"], name: "index_activities_on_activity_type_id"
+  end
+
+  create_table "activities_guests", id: false, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "activity_id"
+    t.bigint "guest_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_activities_guests_on_activity_id"
+    t.index ["guest_id"], name: "index_activities_guests_on_guest_id"
   end
 
   create_table "activities_users", id: false, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -72,6 +78,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_25_041734) do
     t.boolean "publico", default: false
     t.date "start_date_sale_ticket"
     t.date "end_date_sale_ticket"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "guests", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "full_name", null: false
+    t.string "email", null: false
+    t.text "description", null: false
+    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
