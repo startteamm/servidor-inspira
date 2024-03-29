@@ -19,8 +19,14 @@ module Api
             days_since_first + 1
           end
 
+          @activities_by_day = @activities_by_day.sort_by { |day, _| day }
+
           json_response = @activities_by_day.map do |day, activities|
-            { day: day, activities: activities }
+            { day: day, activities: 
+              activities.map do |activity|
+                activity.as_json(include: :guests)
+              end
+            }
           end
 
           # Render each group of records in JSON format
@@ -42,15 +48,27 @@ module Api
         @activity.activity_type_id = activity_params[:activity_type_id]
     
         if @activity.save
+          activity_params[:guests].each do |guest_params|
+            create_guest(@activity, guest_params)
+          end
           render json: @activity, status: :created, location: @activity
         else
           render json: @activity.errors, status: :unprocessable_entity
         end
       end
+
+      def create_guest(activity, params)
+        @guest = Guest.new(guest_params)
+        if @guest.save
+          activity.guests << @guest
+        else
+          render json: @guest.errors, status: :unprocessable_entity
+        end
+      end
     
       # PATCH/PUT /activities/1
       def update
-        if @activity.update(activity_params)
+        if @activity.update(activity_params)S
           render json: @activity
         else
           render json: @activity.errors, status: :unprocessable_entity
@@ -70,7 +88,8 @@ module Api
     
         # Only allow a list of trusted parameters through.
         def activity_params
-          params.permit(:title, :image, :date, :time, :speakers_name, :speakers_job, :activity_type_id)
+          params.permit(:title, :description, :duration, :image, :date, :workload, :start_time,  
+                        :location, :capacity, :activity_type_id, guests: [:full_name, :email, :description, :image])
         end
       end
   end

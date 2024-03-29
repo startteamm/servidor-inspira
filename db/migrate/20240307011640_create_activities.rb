@@ -8,9 +8,6 @@ class CreateActivities < ActiveRecord::Migration[7.0]
       t.date :date, null: false
       t.string :workload, null: false
       t.time :start_time, null: false
-      t.string :guest_full_name, null: false
-      t.string :guest_email, null: false
-      t.text :guest_description, null: false
       t.string :location, null: false
       t.integer :capacity, null: false
 
