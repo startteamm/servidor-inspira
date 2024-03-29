@@ -8,18 +8,27 @@ module Api
       def index
         # Fetch all records from the database
         @activities = Activity.all
-    
-        # Group the records into groups of six
-        @activity_groups = @activities.each_slice(6).to_a
-    
-        # Name each group
-        @activity_groups.each_with_index do |group, index|
-          group_name = "#{index + 1}" # Naming each group as "Dia 1", "Dia 2", ...
-          group.instance_variable_set(:@group_name, group_name)
+
+        # Determine the reference date (you can choose any starting date)
+        first_date = @activities.minimum(:date)
+
+        if first_date.present?
+          # Group the records by the day count since the reference date
+          @activities_by_day = @activities.group_by do |record|
+            days_since_first = (record.date - first_date).to_i
+            days_since_first + 1
+          end
+
+          json_response = @activities_by_day.map do |day, activities|
+            { day: day, activities: activities }
+          end
+
+          # Render each group of records in JSON format
+          render json: json_response
+          
+        else
+          render json: { error: "No activities found." }, status: :not_found
         end
-    
-        # Render each group of records in JSON format with their respective names
-        render json: @activity_groups.map { |group| { day: group.instance_variable_get(:@group_name).to_i, activities: group } }
       end
     
       # GET /activities/1
