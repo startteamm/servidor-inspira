@@ -6,4 +6,8 @@ class Event < ApplicationRecord
   validates :start_date_sale_ticket, :end_date_sale_ticket,
              date: true, if: -> { start_date_sale_ticket || end_date_sale_ticket }
   validates :cep, format: { with: /(^[0-9]{5})-([0-9]{3}$)/ }
+
+  def address
+    "#{street}, #{neighborhood} - #{city}"
+  end
 end
