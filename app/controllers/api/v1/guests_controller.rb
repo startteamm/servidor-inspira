@@ -2,6 +2,13 @@ module Api
     module V1
     class GuestsController < ApiController
         before_action :set_guest, only: %i[ show update destroy ]
+
+        def index
+          # Fetch all records from the database
+          @guests = Guest.all
+
+          render json: @guests
+        end
       
         def show
           render json: @guest
