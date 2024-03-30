@@ -37,7 +37,7 @@ module Api
         tmp_file = Tempfile.new(["qrcode-#{SecureRandom.alphanumeric(10)}", '.png'])
 
         qrcode = RQRCode::QRCode.new(@ticket.code)
-      
+
         png = qrcode.as_png(
           bit_depth: 1,
           border_modules: 4,
@@ -77,7 +77,7 @@ module Api
       end
 
       def params_ticket
-        params.permit(:type_ticket_id)
+        params.permit(:type_ticket_id, :user_id)
       end
     end
   end
