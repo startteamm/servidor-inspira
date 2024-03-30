@@ -24,14 +24,15 @@ Rails.application.routes.draw do
       resources :type_tickets
       resources :tickets
       resources :activities
+      resources :guests
       get 'tickets/:id/qrcode', to: 'tickets#qrcode'
       put 'tickets/:code/validar_ingresso', to: 'tickets#validar_ingresso'
     end
   end
+  
 
   # get '/lojinha', to: 'shop#index'
   # get '/ingressos', to: 'ticket#index'
-  # get '/programacao', to: 'schedule#index'
   # get '/quem-somos', to: 'about#index'
   # get '/ultimas-edicoes', to: 'about#past_events'
   # get '/equipes', to: 'about#teams'
