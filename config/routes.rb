@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       resources :type_tickets
       resources :tickets
       resources :activities, except: [:index]
+      resources :guests
       get 'tickets/:id/qrcode', to: 'tickets#qrcode'
       put 'tickets/:code/validar_ingresso', to: 'tickets#validar_ingresso'
     end
