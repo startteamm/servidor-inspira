@@ -48,27 +48,15 @@ module Api
         @activity.activity_type_id = activity_params[:activity_type_id]
     
         if @activity.save
-          activity_params[:guests].each do |guest_params|
-            create_guest(@activity, guest_params)
-          end
-          render json: @activity, status: :created, location: @activity
+          render json: @activity.as_json(include: :guests), status: :created
         else
           render json: @activity.errors, status: :unprocessable_entity
-        end
-      end
-
-      def create_guest(activity, params)
-        @guest = Guest.new(guest_params)
-        if @guest.save
-          activity.guests << @guest
-        else
-          render json: @guest.errors, status: :unprocessable_entity
         end
       end
     
       # PATCH/PUT /activities/1
       def update
-        if @activity.update(activity_params)S
+        if @activity.update(activity_params)
           render json: @activity
         else
           render json: @activity.errors, status: :unprocessable_entity
@@ -88,8 +76,8 @@ module Api
     
         # Only allow a list of trusted parameters through.
         def activity_params
-          params.permit(:title, :description, :duration, :image, :date, :workload, :start_time,  
-                        :location, :capacity, :activity_type_id, guests: [:full_name, :email, :description, :image])
+          params.require(:activity).permit(:title, :description, :duration, :image, :date, :workload, :start_time,
+                                           :location, :capacity, :activity_type_id, guest_ids: [])
         end
       end
   end
