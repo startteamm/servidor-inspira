@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_29_124203) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_31_212428) do
   create_table "activities", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
@@ -19,6 +19,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_29_124203) do
     t.date "date", null: false
     t.string "workload", null: false
     t.time "start_time", null: false
+    t.string "guest_full_name", null: false
+    t.string "guest_email", null: false
+    t.text "guest_description", null: false
     t.string "location", null: false
     t.integer "capacity", null: false
     t.datetime "created_at", null: false
@@ -26,8 +29,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_29_124203) do
     t.bigint "activity_type_id"
     t.index ["activity_type_id"], name: "index_activities_on_activity_type_id"
   end
-  
-  create_table "activities_guests", id: false, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+
+  create_table "activities_guests", id: false, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "activity_id"
     t.bigint "guest_id"
     t.datetime "created_at", null: false
@@ -82,13 +85,28 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_29_124203) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "guests", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "guests", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "full_name", null: false
     t.string "email", null: false
     t.text "description", null: false
     t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "payments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.text "response_json", size: :long, collation: "utf8mb4_bin"
+    t.string "x_idempotency_key"
+    t.string "card_token_digest"
+    t.integer "type"
+    t.integer "status", default: 0
+    t.bigint "user_id"
+    t.bigint "type_ticket_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["type_ticket_id"], name: "index_payments_on_type_ticket_id"
+    t.index ["user_id"], name: "index_payments_on_user_id"
+    t.check_constraint "json_valid(`response_json`)", name: "response_json"
   end
 
   create_table "tickets", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|

@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
     namespace :v1 do
       get 'users/:id/tickets', to: 'users#tickets'
+      get 'users/:id/tickets/:id_ticket', to: 'users#ticket'
       resources :events
       resources :type_tickets
       resources :tickets
