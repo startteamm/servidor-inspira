@@ -14,15 +14,18 @@ Rails.application.routes.draw do
   namespace :admin do
     post 'ativacao_app', to: 'app_auth#ativacao_app'
   end
-  
+
   namespace :api, defaults: { format: :json } do
     mount_devise_token_auth_for 'User', at: 'auth', controllers: { omniauth_callbacks: "api/v1/omniauth_callbacks" }
 
     namespace :v1 do
+      get 'users/:id/tickets', to: 'users#tickets'
+      get 'users/:id/tickets/:id_ticket', to: 'users#ticket'
       resources :events
       resources :type_tickets
       resources :tickets
       resources :activities
+      resources :guests
       get 'tickets/:id/qrcode', to: 'tickets#qrcode'
       put 'tickets/:code/validar_ingresso', to: 'tickets#validar_ingresso'
       namespace :payments do
