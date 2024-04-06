@@ -44,10 +44,12 @@ module MercadoPago
       }
 
       response = RestClient.post(URL, formatted_body.to_json, header)
+      [response.code, response]
     rescue RestClient::Exception => e
-      e.http_body
+      response = e
+      [response.http_code, response.http_body]
     ensure
-      @payment.response_json = JSON.parse(response)
+      @payment.response = response
     end
 
     def body_payer
