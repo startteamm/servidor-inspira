@@ -28,15 +28,11 @@ Rails.application.routes.draw do
       resources :guests
       get 'tickets/:id/qrcode', to: 'tickets#qrcode'
       put 'tickets/:code/validar_ingresso', to: 'tickets#validar_ingresso'
+      namespace :payments do
+        post 'tickets/:id_ticket/start_checkout', to: 'tickets#start_checkout'
+        post 'tickets/:x_idempotency_key/pix', to: 'tickets#pix'
+        post 'tickets/:x_idempotency_key/cartao', to: 'tickets#cartao'
+      end
     end
   end
-  
-
-  # get '/lojinha', to: 'shop#index'
-  # get '/ingressos', to: 'ticket#index'
-  # get '/quem-somos', to: 'about#index'
-  # get '/ultimas-edicoes', to: 'about#past_events'
-  # get '/equipes', to: 'about#teams'
-  # get '/faq', to: 'about#faq'
-  # get '/ajuda', to: 'about#help'
 end
