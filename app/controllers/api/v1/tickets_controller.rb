@@ -34,27 +34,21 @@ module Api
       end
 
       def qrcode
-        tmp_file = Tempfile.new(["qrcode-#{SecureRandom.alphanumeric(10)}", '.png'])
-
         qrcode = RQRCode::QRCode.new(@ticket.code)
 
         png = qrcode.as_png(
           bit_depth: 1,
-          border_modules: 4,
+          border_modules: 1,
           color_mode: ChunkyPNG::COLOR_GRAYSCALE,
           color: 'black',
           file: nil,
           fill: 'white',
-          module_px_size: 10,
+          module_px_size: 11,
           resize_exactly_to: false,
-          resize_gte_to: false,
-          size: 120
+          resize_gte_to: false
         )
 
-        IO.binwrite(tmp_file.path, png.to_s)
-
-        send_file(tmp_file.path)
-        tmp_file.close
+        render(json: { qrcode: Base64.encode64(png.to_s) })
       end
 
       def validar_ingresso
@@ -67,7 +61,7 @@ module Api
           return head(:ok)
         end
 
-        render(json: { messagem: 'Ingresso já foi validado.'}, status: :bad_request)
+        render(json: { messagem: 'Ingresso já foi validado.' }, status: :bad_request)
       end
 
       private
