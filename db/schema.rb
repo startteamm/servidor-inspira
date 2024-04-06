@@ -14,20 +14,26 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_31_212428) do
   create_table "activities", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
-    t.string "duration", null: false
     t.string "image"
     t.date "date", null: false
     t.string "workload", null: false
     t.time "start_time", null: false
-    t.string "guest_full_name", null: false
-    t.string "guest_email", null: false
-    t.text "guest_description", null: false
+    t.time "end_time", null: false
     t.string "location", null: false
     t.integer "capacity", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "activity_type_id"
     t.index ["activity_type_id"], name: "index_activities_on_activity_type_id"
+  end
+
+  create_table "activities_guests", id: false, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.bigint "activity_id"
+    t.bigint "guest_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_activities_guests_on_activity_id"
+    t.index ["guest_id"], name: "index_activities_guests_on_guest_id"
   end
 
   create_table "activities_users", id: false, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -76,6 +82,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_31_212428) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "guests", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "full_name", null: false
+    t.string "email", null: false
+    t.text "description", null: false
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "payments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.text "response"
     t.string "x_idempotency_key"
@@ -95,8 +110,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_31_212428) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "type_ticket_id", null: false
+    t.bigint "user_id", null: false
     t.index ["code"], name: "index_tickets_on_code", unique: true
     t.index ["type_ticket_id"], name: "index_tickets_on_type_ticket_id"
+    t.index ["user_id"], name: "index_tickets_on_user_id"
   end
 
   create_table "type_tickets", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -150,5 +167,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_31_212428) do
 
   add_foreign_key "activities", "activity_types"
   add_foreign_key "tickets", "type_tickets"
+  add_foreign_key "tickets", "users"
   add_foreign_key "type_tickets", "events"
 end

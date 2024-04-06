@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_and_belongs_to_many :activities
   has_many :payments
   has_many :type_tickets, through: :payments
+  has_many :tickets
 
   before_validation :set_uuid
 
