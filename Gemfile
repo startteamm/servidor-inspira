@@ -24,8 +24,6 @@ gem "puma", ">= 5.0"
 gem "bcrypt", "~> 3.1.7"
 gem 'jwt', '~> 2.7', '>= 2.7.1'
 
-gem 'rqrcode'
-
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
@@ -38,17 +36,18 @@ gem "bootsnap", require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
 gem "rack-cors"
 
-
 # gems
 gem 'devise'
 gem 'devise_token_auth'
 gem 'omniauth-google-oauth2'
 # gem "omniauth-rails_csrf_protection", "~> 1.0"
 
-
 # documentação de rotas
 gem 'rswag-api'
 gem 'rswag-ui'
+
+gem 'rqrcode'
+gem 'rest-client', '~> 2.1'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -66,4 +65,3 @@ group :development do
 
   gem "error_highlight", ">= 0.4.0", platforms: [:ruby]
 end
-
