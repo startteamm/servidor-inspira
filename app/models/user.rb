@@ -2,6 +2,8 @@ class User < ApplicationRecord
   include DeviseTokenAuth::Concerns::User
 
   has_and_belongs_to_many :activities
+  has_many :payments
+  has_many :type_tickets, through: :payments
   has_many :tickets
 
   before_validation :set_uuid
@@ -17,7 +19,6 @@ class User < ApplicationRecord
 
   enum role: %i[participante admin]
   enum gender: %i[homem_cis mulher_cis homem_trans mulher_trans nao_binario agenero neutro outro]
-
 
   validates :full_name, :phone, :email, presence: true
   validates :email, uniqueness: { case_sensitive: false }

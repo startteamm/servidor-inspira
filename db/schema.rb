@@ -14,14 +14,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_31_212428) do
   create_table "activities", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
-    t.string "duration", null: false
     t.string "image"
     t.date "date", null: false
     t.string "workload", null: false
     t.time "start_time", null: false
-    t.string "guest_full_name", null: false
-    t.string "guest_email", null: false
-    t.text "guest_description", null: false
+    t.time "end_time", null: false
     t.string "location", null: false
     t.integer "capacity", null: false
     t.datetime "created_at", null: false
@@ -95,10 +92,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_31_212428) do
   end
 
   create_table "payments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.text "response_json", size: :long, collation: "utf8mb4_bin"
+    t.text "response"
     t.string "x_idempotency_key"
-    t.string "card_token_digest"
-    t.integer "type"
+    t.integer "tipo"
     t.integer "status", default: 0
     t.bigint "user_id"
     t.bigint "type_ticket_id"
@@ -106,7 +102,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_31_212428) do
     t.datetime "updated_at", null: false
     t.index ["type_ticket_id"], name: "index_payments_on_type_ticket_id"
     t.index ["user_id"], name: "index_payments_on_user_id"
-    t.check_constraint "json_valid(`response_json`)", name: "response_json"
   end
 
   create_table "tickets", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
