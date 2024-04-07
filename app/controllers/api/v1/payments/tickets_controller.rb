@@ -63,8 +63,8 @@ module Api
           date = Time.zone.parse(response_gateway_json['date_of_expiration'])
 
           {
-            "qr_code_base64": filter_response['qr_code'],
-            "qr_code": filter_response['qr_code_base64'],
+            "qr_code_base64": filter_response['qr_code_base64'],
+            "qr_code": filter_response['qr_code'],
             "date_of_expiration": date&.strftime('%d/%m/%Y'),
             "hour_of_expiration": date&.strftime('%H:%M:%S')
           }
