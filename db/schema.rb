@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_31_212428) do
-  create_table "activities", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+ActiveRecord::Schema[7.0].define(version: 2024_04_09_024800) do
+  create_table "activities", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
-    t.string "image"
+    t.binary "image", size: :long
     t.date "date", null: false
     t.string "workload", null: false
     t.time "start_time", null: false
@@ -23,11 +23,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_31_212428) do
     t.integer "capacity", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "activity_type_id"
-    t.index ["activity_type_id"], name: "index_activities_on_activity_type_id"
   end
 
-  create_table "activities_guests", id: false, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+  create_table "activities_guests", id: false, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "activity_id"
     t.bigint "guest_id"
     t.datetime "created_at", null: false
@@ -36,7 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_31_212428) do
     t.index ["guest_id"], name: "index_activities_guests_on_guest_id"
   end
 
-  create_table "activities_users", id: false, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+  create_table "activities_users", id: false, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "activity_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
@@ -45,13 +43,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_31_212428) do
     t.index ["user_id"], name: "index_activities_users_on_user_id"
   end
 
-  create_table "activity_types", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+  create_table "activity_types", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "app_auths", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+  create_table "app_auths", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "employee_name"
     t.integer "celula"
     t.string "code", null: false
@@ -63,7 +61,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_31_212428) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "events", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+  create_table "events", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
     t.string "link"
@@ -82,16 +80,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_31_212428) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "guests", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+  create_table "guests", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "full_name", null: false
     t.string "email", null: false
     t.text "description", null: false
-    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "payments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+  create_table "payments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "response"
     t.string "x_idempotency_key"
     t.integer "tipo"
@@ -104,7 +101,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_31_212428) do
     t.index ["user_id"], name: "index_payments_on_user_id"
   end
 
-  create_table "tickets", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+  create_table "tickets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "code"
     t.boolean "validated", default: false
     t.datetime "created_at", null: false
@@ -116,7 +113,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_31_212428) do
     t.index ["user_id"], name: "index_tickets_on_user_id"
   end
 
-  create_table "type_tickets", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+  create_table "type_tickets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.float "value"
@@ -126,7 +123,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_31_212428) do
     t.index ["event_id"], name: "index_type_tickets_on_event_id"
   end
 
-  create_table "users", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -165,7 +162,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_31_212428) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
-  add_foreign_key "activities", "activity_types"
   add_foreign_key "tickets", "type_tickets"
   add_foreign_key "tickets", "users"
   add_foreign_key "type_tickets", "events"
