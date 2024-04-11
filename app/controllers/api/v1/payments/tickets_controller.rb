@@ -9,7 +9,10 @@ module Api
           type_ticket = TypeTicket.find(params[:id_ticket])
           payment = type_ticket.payments.create(user: current_api_user)
 
-          render(json: { x_idempotency_key: payment.x_idempotency_key })
+          render(json: { x_idempotency_key: payment.x_idempotency_key,
+                         user: current_api_user.as_json_checkout,
+                         type_ticket: type_ticket.as_json_checkout
+          })
         end
 
         def pix

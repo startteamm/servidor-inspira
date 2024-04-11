@@ -6,4 +6,12 @@ class TypeTicket < ApplicationRecord
 
   validates :name, :value, presence: true
   validates :name, uniqueness: { case_sensitive: false }
+
+  def as_json_checkout
+    {
+      name: name,
+      description: description,
+      value: value
+    }
+  end
 end
