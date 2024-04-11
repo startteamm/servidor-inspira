@@ -25,12 +25,12 @@ class User < ApplicationRecord
   validates :phone, format: { with: REGEX_TEL }
 
   validates :cpf, format: { with: REGEX_CPF }, allow_blank: true
-  validates :rg, format: { with: REGEX_RG }, allow_blank: true
+  # validates :rg, format: { with: REGEX_RG }, allow_blank: true
   validates :birth_date, date: true, allow_blank: true
   validates :gender, inclusion: { in: genders.keys, message: 'invalid' }, allow_blank: true
 
   with_options if: :can_validate_account_update_params? do |u|
-    u.validates :cpf, :rg, :address, presence: true
+    u.validates :cpf, :address, presence: true
   end
 
   def gender=(value)
@@ -52,6 +52,21 @@ class User < ApplicationRecord
   def enable_validate_account_update_params!
     self.validate_account_update_params = true
     save
+  end
+
+  def as_json_checkout
+    {
+      full_name: full_name,
+      email: email,
+      role: role,
+      phone: phone,
+      university: university,
+      birth_date: birth_date,
+      gender: gender,
+      nationality: nationality,
+      cpf: cpf,
+      address: address
+    }
   end
 
   private
