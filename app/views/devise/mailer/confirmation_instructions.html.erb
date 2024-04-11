@@ -23,12 +23,6 @@
             height: auto; /* Maintain aspect ratio */
         }
 
-        .mail-icon {
-            padding-top: 25px;
-            width: 10%;
-            height: auto;
-        }
-
         .blue-title {
             color: #3C22E8;
             font-weight: bold;
@@ -63,9 +57,9 @@
 </style>
 
 <div class="container">
-    <img src="https://inspira-bucket.s3.sa-east-1.amazonaws.com/email-template/header.svg">
+    <img src="https://s3-sa-east-1.amazonaws.com/inspira-bucket/email-template/header.svg" alt="Header" title="Header" style="display:block" width="600" height="90">
 
-    <img class="mail-icon" src="https://inspira-bucket.s3.sa-east-1.amazonaws.com/email-template/mail-icon.svg">
+    <img class="mail-icon" src="https://s3-sa-east-1.amazonaws.com/inspira-bucket/email-template/mail-icon.svg" alt="IconeEmail" title="MailIcon" style="display:block;padding-top: 25px;" width="60" height="71"> 
 
     <p class="blue-title">Confirme seu e-mail</p>
 
@@ -74,6 +68,6 @@
     <p class="email-text-one text-center">Agora precisamos que você <br> clique no botão abaixo para que o seu <br> endereço de e-mail seja verificado.</p>
 
     <%= link_to(confirmation_url(@resource, confirmation_token: @token), class: "confirmation-link") do %>
-        <%= image_tag("https://inspira-bucket.s3.sa-east-1.amazonaws.com/email-template/confirmation-btn.svg", alt: "Verifique seu email") %>
+        <img src="https://s3-sa-east-1.amazonaws.com/inspira-bucket/email-template/confirmation-btn.svg" alt="VerifiqueSeuEmail" title="EmailConfirmation" style="display:block" width="100%" height="auto">
     <% end %>
 </div>
