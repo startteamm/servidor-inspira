@@ -1,5 +1,79 @@
-<p>Welcome <%= @email %>!</p>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Space Grotesk", sans-serif;
+            background-color: #fff;
+        }
 
-<p>You can confirm your account email through the link below:</p>
+        .container {
+            width: 100%;
+            max-width: 600px; /* Adjust maximum width as needed */
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+        .container img {
+            max-width: 100%; /* Ensure images don't exceed container width */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        .mail-icon {
+            padding-top: 25px;
+            width: 10%;
+            height: auto;
+        }
+
+        .blue-title {
+            color: #3C22E8;
+            font-weight: bold;
+            font-size: 18px;
+            padding-top: 15px;
+        }
+
+        .email-text-one {
+            color: #000;
+            font-size: 13px;
+            padding-top: 5px;
+        }
+
+        .confirmation-link {
+            padding-top: 15px;
+            width: 35%;
+            height: auto;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 0;
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+</style>
+
+<div class="container">
+    <img src="https://inspira-bucket.s3.sa-east-1.amazonaws.com/email-template/header.svg">
+
+    <img class="mail-icon" src="https://inspira-bucket.s3.sa-east-1.amazonaws.com/email-template/mail-icon.svg">
+
+    <p class="blue-title">Confirme seu e-mail</p>
+
+    <p class="email-text-one text-center">Falta pouco para você <br> participar do Inspira Design!</p>
+
+    <p class="email-text-one text-center">Agora precisamos que você <br> clique no botão abaixo para que o seu <br> endereço de e-mail seja verificado.</p>
+
+    <%= link_to(confirmation_url(@resource, confirmation_token: @token), class: "confirmation-link") do %>
+        <%= image_tag("https://inspira-bucket.s3.sa-east-1.amazonaws.com/email-template/confirmation-btn.svg", alt: "Verifique seu email") %>
+    <% end %>
+</div>
