@@ -6,14 +6,14 @@ Rails.application.configure do
   # Code is not reloaded between requests.
   config.enable_reloading = false
 
+  Rails.application.routes.default_url_options[:host] = 'https://www.inspiradesignuff.com'
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: 'smtp.gmail.com',
     port: 587,
-    domain: 'www.inspiradesignuff.com.br',
-    user_name: Rails.application.credentials.dig(:google, :mailer_email),
-    password: Rails.application.credentials.dig(:google, :mailer_email_password),
-    authentication: :plain,
+    address: Rails.application.credentials.dig(:aws, :ses_smtp_endpoint),
+    user_name: Rails.application.credentials.dig(:aws, :ses_smtp_user_name),
+    password: Rails.application.credentials.dig(:aws, :ses_smtp_password),
+    authentication: :login,
     enable_starttls_auto: true
   }
 
