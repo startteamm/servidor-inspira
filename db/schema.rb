@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_09_024800) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_14_051614) do
   create_table "activities", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
@@ -120,6 +120,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_09_024800) do
     t.string "name"
     t.text "description"
     t.float "value"
+    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "event_id", null: false
@@ -147,6 +148,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_09_024800) do
     t.string "email", null: false
     t.integer "role", default: 0, null: false
     t.string "phone", null: false
+    t.string "image"
     t.string "university"
     t.date "birth_date"
     t.integer "gender"
@@ -158,7 +160,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_09_024800) do
     t.text "tokens"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "image"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
