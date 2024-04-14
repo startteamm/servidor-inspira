@@ -9,11 +9,12 @@ Rails.application.configure do
   Rails.application.routes.default_url_options[:host] = 'https://www.inspiradesignuff.com'
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
+    address: 'smtp.gmail.com',
     port: 587,
-    address: Rails.application.credentials.dig(:aws, :ses_smtp_endpoint),
-    user_name: Rails.application.credentials.dig(:aws, :ses_smtp_user_name),
-    password: Rails.application.credentials.dig(:aws, :ses_smtp_password),
-    authentication: :login,
+    domain: 'www.inspiradesignuff.com.br',
+    user_name: Rails.application.credentials.dig(:google, :mailer_email),
+    password: Rails.application.credentials.dig(:google, :mailer_email_password),
+    authentication: :plain,
     enable_starttls_auto: true
   }
 
