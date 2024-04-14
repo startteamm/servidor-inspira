@@ -18,6 +18,20 @@ module Api
         render(json: format_response_ticket(@ticket))
       end
 
+      def registration_in_activities
+        activity_ids = params.permit(activity_ids: [])[:activity_ids]
+
+        return render(json: { activity_ids: "can't be empty" }, status: :unprocessable_entity) if activity_ids.blank?
+
+        begin
+          current_api_user.activity_ids = activity_ids
+
+          render(json: current_api_user.activities)
+        rescue => e
+          render(json: { activity_ids: e.message.split('.').last.strip }, status: :unprocessable_entity)
+        end
+      end
+
       private
 
       def set_user
