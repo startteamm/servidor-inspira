@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       get 'users/:id/tickets', to: 'users#tickets'
       get 'users/:id/tickets/:id_ticket', to: 'users#ticket'
+      post 'users/registration_in_activities', to: 'users#registration_in_activities'
       resources :events
       resources :type_tickets
       resources :tickets
