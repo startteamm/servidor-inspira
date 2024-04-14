@@ -1,8 +1,94 @@
 pt-BR:
   activerecord:
+    models:
+      activity: Atividade
+      event: Evento
+      guest: Palestrante
+      user: Usuário
+      activity_type: Tipo de Atividade
+      app_auth: Autenticação do Aplicativo
+      payment: Pagamento
+      ticket: Ingresso
+      ticket_type: Tipo de Ingresso
+    attributes:
+      activity:
+        title: Título
+        description: Descrição
+        image: Imagem
+        date: Data
+        workload: Carga Horária
+        start_time: Hora de Início
+        end_time: Hora de Término
+        location: Local
+        capacity: Quantidade de Inscritos
+        created_at: Criado em
+        updated_at: Atualizado em
+        activity_type_id: ID do Tipo de Atividade
+      activity_guests:
+        activity_id: ID da Atividade
+        guest_id: ID do Palestrante
+        created_at: Criado em
+        updated_at: Atualizado em
+      activity_users:
+        activity_id: ID da Atividade
+        user_id: ID do Usuário
+        created_at: Criado em
+        updated_at: Atualizado em
+      activity_type:
+        title: Título
+        created_at: Criado em
+        updated_at: Atualizado em
+      event:
+        name: Nome
+        start_date: Data de Início
+        end_date: Data de Término
+        publico: Público
+        created_at: Criado em
+        updated_at: Atualizado em
+      guest:
+        full_name: Nome Completo
+        email: E-mail
+        description: Descrição
+        created_at: Criado em
+        updated_at: Atualizado em
+      tickets:
+        user_id: ID do Usuário
+        event_id: ID do Evento
+        ticket_type_id: ID do Tipo de Ingresso
+        created_at: Criado em
+        updated_at: Atualizado em
+        code: Código
+        validated: Validado
+      type_ticket: 
+        name: Nome
+        description: Descrição
+        value: Preço
+        image: Imagem
+        created_at: Criado em
+        updated_at: Atualizado em
+        event_id: ID do Evento
+      user:
+        full_name: Nome completo
+        phone: Telefone
+        email: E-mail
+        password: Senha
+        password_confirmation: Confirmação de Senha
+        provider: Provedor do Usuário
+        uid: ID Universal 
+        university: Universidade
+        image: Imagem
+        role: Função
+        birth_date: Data de Nascimento
+        gender: Gênero
+        nationality: Nacionalidade
+        rg: RG
+        cpf: CPF
+        address: Endereço
+        created_at: Criado em
+        updated_at: Atualizado em
     errors:
       models:
-        activity:
+        activity: 
           attributes:
             title:
               blank: não pode ficar em branco
