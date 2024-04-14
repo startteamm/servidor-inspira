@@ -11,13 +11,13 @@
     <body>
         <div style="margin: 0;padding: 0;font-family: sans-serif;background-color: #fff;">
             <div style="width: 100%;max-width: 600px;margin: 0 auto;display: flex;flex-direction: column;justify-content: center;align-items: center;">
-                <img src="https://s3-sa-east-1.amazonaws.com/inspira-bucket/email-template/header1.png" alt="Header" title="Header" style="display:block; width: 100%; height: auto;">
-                <img src="https://s3-sa-east-1.amazonaws.com/inspira-bucket/email-template/mail-icon1.png" alt="IconeEmail" title="MailIcon" style="display:block;padding-top: 25px;width: 13%;height: auto;"> 
+                <img src="https://s3-sa-east-1.amazonaws.com/inspira-bucket/email-template/header1.png" alt="Header" title="Header" style="width: 100%; height: auto;">
+                <img src="https://s3-sa-east-1.amazonaws.com/inspira-bucket/email-template/mail-icon1.png" alt="IconeEmail" title="MailIcon" style="padding-top: 25px;width: 13%;height: auto;"> 
                 <p style="color: #3C22E8;font-weight: bold;font-size: 22px;margin-bottom: 15px;margin-top:12px;">Confirme seu e-mail</p>
                 <p style="color: #000;font-size: 16px;margin-top: 0px;text-align: center;">Falta pouco para você<br>participar do Inspira Design!</p>
                 <p style="color: #000;font-size: 16px;margin-top: 0px;text-align: center;">Agora precisamos que você<br>clique no botão abaixo para que o seu<br>endereço de e-mail seja verificado.</p>
                 <%= link_to(confirmation_url(@resource, confirmation_token: @token), style: "width: 38%;height: auto;padding-top:10px;") do %> 
-                    <img src="https://s3-sa-east-1.amazonaws.com/inspira-bucket/email-template/confirmation-btn1.png" alt="VerifiqueSeuEmail" title="EmailConfirmation" style="display:block" width="100%" height="auto">
+                    <img src="https://s3-sa-east-1.amazonaws.com/inspira-bucket/email-template/confirmation-btn1.png" alt="VerifiqueSeuEmail" title="EmailConfirmation" style="width:100%;height:auto;">
                 <% end %>
             </div>
         </div>
