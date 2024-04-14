@@ -14,15 +14,17 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_09_024800) do
   create_table "activities", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
-    t.binary "image", size: :long
+    t.string "duration", null: false
+    t.string "image"
     t.date "date", null: false
     t.string "workload", null: false
     t.time "start_time", null: false
-    t.time "end_time", null: false
     t.string "location", null: false
     t.integer "capacity", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "activity_type_id"
+    t.index ["activity_type_id"], name: "index_activities_on_activity_type_id"
   end
 
   create_table "activities_guests", id: false, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -84,6 +86,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_09_024800) do
     t.string "full_name", null: false
     t.string "email", null: false
     t.text "description", null: false
+    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -162,6 +165,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_09_024800) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "activities", "activity_types"
   add_foreign_key "tickets", "type_tickets"
   add_foreign_key "tickets", "users"
   add_foreign_key "type_tickets", "events"
