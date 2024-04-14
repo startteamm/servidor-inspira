@@ -9,6 +9,7 @@ class TypeTicket < ApplicationRecord
 
   def as_json_checkout
     {
+      image: image,
       name: name,
       description: description,
       value: value
