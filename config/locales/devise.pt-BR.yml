@@ -16,7 +16,7 @@ pt-BR:
       unconfirmed: "Você deve confirmar o seu endreço de e-mail antes de continuar."
     mailer:
       confirmation_instructions:
-        subject: "Instruções de confirmação"
+        subject: "Ative sua conta"
       reset_password_instructions:
         subject: "Instruções para redefinir sua senha"
       unlock_instructions:
