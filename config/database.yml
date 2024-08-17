@@ -14,8 +14,8 @@ default: &default
   encoding: utf8mb4
   pool: 5
   socket: /var/run/mysqld/mysqld.sock
-  username: <%= ENV.fetch("USERNAME_DB") %>
-  password: <%= ENV.fetch("PASSWORD_DB") %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
 
 development:
   <<: *default
@@ -28,31 +28,9 @@ test:
   <<: *default
   database: sistema_inspira_test
 
-# As with config/credentials.yml, you never want to store sensitive information,
-# like your database password, in your source code. If your source code is
-# ever seen by anyone, they now have access to your database.
-#
-# Instead, provide the password or a full connection URL as an environment
-# variable when you boot the app. For example:
-#
-#   DATABASE_URL="mysql2://myuser:mypass@localhost/somedatabase"
-#
-# If the connection URL is provided in the special DATABASE_URL environment
-# variable, Rails will automatically merge its configuration values on top of
-# the values provided in this file. Alternatively, you can specify a connection
-# URL environment variable explicitly:
-#
-#   production:
-#     url: <%= ENV["MY_APP_DATABASE_URL"] %>
-#
-# Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
-# for a full overview on how database connection configuration can be specified.
-#
 production:
   <<: *default
-  database: <%= Rails.application.credentials.database[:my_sql_database] %>
-  host: <%= Rails.application.credentials.database[:my_sql_host] %>
-  username: <%= Rails.application.credentials.database[:my_sql_user] %>
-  password: <%= Rails.application.credentials.database[:my_sql_root_password] %>
-  port: <%= Rails.application.credentials.database[:my_sql_port] %>
-  url: <%= Rails.application.credentials.database[:my_sql_url] %>
+  database: <%= ENV['DB_NAME'] %>
+  host: <%= ENV['DB_HOST'] %>
+  port: <%= ENV['DB_PORT'] %>
+  url: <%= ENV['DB_URL'] %>
