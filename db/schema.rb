@@ -120,10 +120,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_14_051614) do
     t.string "name"
     t.text "description"
     t.float "value"
-    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "event_id", null: false
+    t.string "image"
     t.index ["event_id"], name: "index_type_tickets_on_event_id"
   end
 
