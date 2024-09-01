@@ -6,19 +6,10 @@ Rails.application.configure do
   # Code is not reloaded between requests.
   config.enable_reloading = false
 
-  Rails.application.routes.default_url_options[:host] = 'https://www.inspiradesignuff.com'
+  ENV_SETTINGS_ACTION_MAILER = ENV_SETTINGS[:action_mailer]
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address: 'smtp.gmail.com',
-    port: 587,
-    domain: 'www.inspiradesignuff.com.br',
-    user_name: Rails.application.credentials.dig(:google, :mailer_email),
-    password: Rails.application.credentials.dig(:google, :mailer_email_password),
-    authentication: :plain,
-    enable_starttls_auto: true
-  }
-
-  config.action_mailer.default_url_options = { host: "https://www.inspiradesignuff.com" }
+  config.action_mailer.smtp_settings = ENV_SETTINGS_ACTION_MAILER[:smtp_settings]
+  config.action_mailer.default_url_options = ENV_SETTINGS_ACTION_MAILER[:default_url_options]
 
 
   # Eager load code on boot. This eager loads most of Rails and
