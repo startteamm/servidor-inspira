@@ -1,0 +1,54 @@
+default:
+  database: &default_database
+    username: <%= ENV['DB_USERNAME'] %>
+    password: <%= ENV['DB_PASSWORD'] %>
+    name: <%= ENV['DB_NAME'] || 'Sistema_inspira' %>
+
+  action_mailer: 
+    smtp_settings: &default_smtp_settings
+      address: smtp.gmail.com
+      port: 587
+      authentication: plain
+      enable_starttls_auto: true
+
+development:
+  database:
+    <<: *default_database
+
+  action_mailer:
+    smtp_settings: 
+      <<: *default_smtp_settings
+      domain: <%= ENV['DEV_SMTP_SETTINGS_DOMAIN'] %>
+      user_name: <%= ENV['DEV_SMTP_SETTINGS_USERNAME'] %>
+      password: <%= ENV['DEV_SMTP_SETTINGS_PASSWORD'] %>
+
+    default_url_options:
+      host: <%= ENV['DEV_ACTION_MAILER_HOST'] %>
+      protocol: <%= ENV['DEV_ACTION_MAILER_PROTOCOL'] %>
+  
+  devise:
+    confirm_success_url: <%= ENV['DEV_DEVISE_CONFIRM_SUCCESS_URL'] %>
+
+test:
+  database:
+    <<: *default_database
+
+production:
+  database:
+    <<: *default_database
+    host: <%= ENV['DB_HOST'] %>
+    port: <%= ENV['DB_PORT'] %>
+
+  action_mailer:
+    smtp_settings:
+      <<: *default_smtp_settings
+      domain: <%= ENV['SMTP_SETTINGS_DOMAIN'] %>
+      user_name: <%= ENV['SMTP_SETTINGS_USERNAME'] %>
+      password: <%= ENV['SMTP_SETTINGS_PASSWORD'] %>
+
+    default_url_options:
+      host: <%= ENV['ACTION_MAILER_HOST'] %>
+      protocol: <%= ENV['ACTION_MAILER_PROTOCOL'] %>
+
+  devise:
+    confirm_success_url: <%= ENV['DEVISE_CONFIRM_SUCCESS_URL'] %>
