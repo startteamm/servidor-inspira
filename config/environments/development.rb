@@ -8,7 +8,10 @@ Rails.application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.enable_reloading = true
 
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  ENV_SETTINGS_ACTION_MAILER = ENV_SETTINGS[:action_mailer]
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = ENV_SETTINGS_ACTION_MAILER[:smtp_settings]
+  config.action_mailer.default_url_options = ENV_SETTINGS_ACTION_MAILER[:default_url_options]
 
   # Do not eager load code on boot.
   config.eager_load = false

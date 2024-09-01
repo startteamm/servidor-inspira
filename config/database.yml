@@ -14,23 +14,22 @@ default: &default
   encoding: utf8mb4
   pool: 5
   socket: /var/run/mysqld/mysqld.sock
-  username: <%= ENV['DB_USERNAME'] %>
-  password: <%= ENV['DB_PASSWORD'] %>
+  username: <%= ENV_SETTINGS[:database][:username] %>
+  password: <%= ENV_SETTINGS[:database][:password] %>
 
 development:
   <<: *default
-  database: sistema_inspira_development
+  database: <%= ENV_SETTINGS[:database][:name] %>_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: sistema_inspira_test
+  database: <%= ENV_SETTINGS[:database][:name] %>_test
 
 production:
   <<: *default
-  database: <%= ENV['DB_NAME'] %>
-  host: <%= ENV['DB_HOST'] %>
-  port: <%= ENV['DB_PORT'] %>
-  url: <%= ENV['DB_URL'] %>
+  database: <%= ENV_SETTINGS[:database][:name] %>
+  host: <%= ENV_SETTINGS[:database][:host] %>
+  port: <%= ENV_SETTINGS[:database][:port] %>
