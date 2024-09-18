@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_14_051614) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_18_022951) do
   create_table "activities", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
@@ -102,6 +102,23 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_14_051614) do
     t.datetime "updated_at", null: false
     t.index ["type_ticket_id"], name: "index_payments_on_type_ticket_id"
     t.index ["user_id"], name: "index_payments_on_user_id"
+  end
+
+  create_table "products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description"
+    t.float "price"
+    t.string "promotional_price"
+    t.string "image"
+    t.integer "status"
+    t.string "type"
+    t.integer "stock_quantity", default: 0
+    t.integer "stock_status"
+    t.integer "user_purchase_limit"
+    t.bigint "creator"
+    t.bigint "last_editor"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tickets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
