@@ -39,15 +39,15 @@ class User < ApplicationRecord
     @attributes.write_cast_value('gender', value)
   end
 
-  # def self.from_omniauth(auth)
-  #   where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-  #     user.email = auth.info.email
-  #     user.password = Devise.friendly_token[0, 20]
-  #     user.full_name = auth.info.name
-  #     user.avatar_url = auth.info.image
-  #     user.skip_confirmation!
-  #   end
-  # end
+  def self.from_omniauth(access_token)
+    data = access_token.info
+    user = User.where(email: data['email']).first
+
+    user ||= User.create(name: data['name'],
+                        email: data['email'],
+                        password: Devise.friendly_token[0, 20])
+    user
+  end
 
   def enable_validate_account_update_params!
     self.validate_account_update_params = true

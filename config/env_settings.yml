@@ -10,6 +10,11 @@ default:
       port: 587
       authentication: plain
       enable_starttls_auto: true
+  credencial_omnioauth:
+    google_client_key: "1079009573385-emkiv974cunh2cnpd5nrpdo4pnkhhhav.apps.googleusercontent.com"
+    google_client_secret: "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"
+    # google_client_key: <%= ENV['GOOGLE_KEY'] %>
+    # google_client_secret: <%= ENV['GOOGLE_SECRET'] %>
 
 development:
   database:

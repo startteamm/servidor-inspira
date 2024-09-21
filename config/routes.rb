@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   end
 
   namespace :api, defaults: { format: :json } do
-    mount_devise_token_auth_for 'User', at: 'auth', controllers: { omniauth_callbacks: "api/v1/omniauth_callbacks" }
+    mount_devise_token_auth_for 'User', at: 'auth'
 
     namespace :v1 do
       get 'users/:id/tickets', to: 'users#tickets'
